@@ -1,6 +1,6 @@
 import { VStack } from "@chakra-ui/react";
 import { Petition } from "@/types";
-import { PopularPetitionItem } from ".";
+import { PopularPetitionItem } from "@/components";
 
 interface PopularPetitionListProps {
   petitions: Petition[];

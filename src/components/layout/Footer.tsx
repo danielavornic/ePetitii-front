@@ -1,3 +1,5 @@
+import Link from "next/link";
+import { useTranslations } from "next-intl";
 import {
   Stack,
   Text,
@@ -8,9 +10,6 @@ import {
   GridItem,
   Flex,
 } from "@chakra-ui/react";
-import { useTranslations } from "next-intl";
-
-import Link from "next/link";
 
 const getCurrentYear = () => new Date().getFullYear();
 

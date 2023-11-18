@@ -1,9 +1,7 @@
 import { PropsWithChildren } from "react";
 import Head from "next/head";
 import { Container, VStack } from "@chakra-ui/react";
-
-import { Header } from "./Header";
-import { Footer } from "./Footer";
+import { Header, Footer } from "@/components";
 
 interface LayoutProps {
   title?: string;
@@ -11,6 +9,7 @@ interface LayoutProps {
   isFull?: boolean;
   hasFooter?: boolean;
 }
+
 export const Layout = ({
   title,
   description,
@@ -23,6 +22,7 @@ export const Layout = ({
       <Head>
         <title>{title ? `${title} e-Petiții` : "e-Petiții"}</title>
         <meta name="description" content={description} />
+        <link rel="icon" href="/favicon.ico" />
       </Head>
       <VStack
         minH="100vh"

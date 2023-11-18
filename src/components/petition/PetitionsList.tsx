@@ -1,5 +1,4 @@
 import { Box, Flex, VStack } from "@chakra-ui/react";
-
 import { Petition } from "@/types";
 import { Loader, PetitionCard } from "@/components";
 

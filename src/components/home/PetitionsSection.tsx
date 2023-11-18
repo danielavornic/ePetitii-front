@@ -1,3 +1,5 @@
+import { useRouter } from "next/router";
+import { useTranslations } from "next-intl";
 import {
   HStack,
   VStack,
@@ -10,15 +12,13 @@ import {
   Checkbox,
 } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
+import { useSelector } from "react-redux";
 
 import { Category, Petition, PetitionStatus } from "@/types";
 import { petitions, categories as categoriesApi } from "@/api";
-import { PetitionsList, PopularPetitionsList } from "@/components";
 import popularPetitionsData from "@/data/petitions.json";
-import { useRouter } from "next/router";
-import { useTranslations } from "next-intl";
-import { useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors";
+import { PetitionsList, PopularPetitionsList } from "@/components";
 
 const statutes = Object.keys(PetitionStatus).map((status) => ({
   key: status,
@@ -68,7 +68,6 @@ export const PetitionsSection = () => {
   const setSortBy = (sortBy: string) => updateParams("sort", sortBy);
   const setStatus = (status: string) => updateParams("status", status);
 
-  // TODO: implement this
   const setAvailableByLocation = (availableByLocation: boolean) => {
     if (availableByLocation) {
       updateParams("region", Number(user?.region));
@@ -95,7 +94,7 @@ export const PetitionsSection = () => {
         <VStack spacing={4} w="full" alignItems="start">
           {user !== null && (
             <Checkbox
-              isChecked={region !== null}
+              isChecked={!!region}
               onChange={(e) => setAvailableByLocation(e.target.checked)}
             >
               {t("filter.only_my_region")}

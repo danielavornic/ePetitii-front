@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { CardBody, Heading, Card, Text, VStack, Progress, HStack } from "@chakra-ui/react";
-import { Petition, PetitionStatus } from "@/types";
 import { useRouter } from "next/router";
 import { useTranslations } from "next-intl";
+import { CardBody, Heading, Card, Text, VStack, Progress, HStack } from "@chakra-ui/react";
+import { Petition, PetitionStatus } from "@/types";
 
 interface PetitionCardProps {
   petition: Petition;

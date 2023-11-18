@@ -1,7 +1,6 @@
-import { CircularProgress, CircularProgressLabel, HStack, Heading } from "@chakra-ui/react";
-
-import { Petition } from "@/types";
 import Link from "next/link";
+import { CircularProgress, CircularProgressLabel, HStack, Heading } from "@chakra-ui/react";
+import { Petition } from "@/types";
 
 interface PopularPetitionItemProps {
   petition: Petition;

@@ -1,5 +1,5 @@
-import { Stack, Flex, Text, VStack, useBreakpointValue, Heading } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
+import { Stack, Flex, Text, VStack, useBreakpointValue, Heading } from "@chakra-ui/react";
 
 export const HomeHero = () => {
   const t = useTranslations("home.hero");
