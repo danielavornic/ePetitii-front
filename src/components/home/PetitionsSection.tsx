@@ -25,7 +25,7 @@ const statutes = Object.keys(PetitionStatus).map((status) => ({
   color: "blue",
 }));
 
-export const PetitionsSection = () => {
+export const PetitionsSection = ({ hasTrending = true }: { hasTrending?: boolean }) => {
   const t = useTranslations();
 
   const { user } = useSelector(selectUser);
@@ -53,7 +53,7 @@ export const PetitionsSection = () => {
   const updateParams = (key: string, value: string | number | boolean | undefined) => {
     push(
       {
-        pathname: "/",
+        pathname: !hasTrending ? "/petitions" : "/",
         query: {
           ...query,
           [key]: value,
@@ -83,11 +83,18 @@ export const PetitionsSection = () => {
       h="max-content"
       justifyContent="space-between"
       alignItems="stretch"
-      py={20}
+      pb={20}
+      pt={hasTrending ? 20 : 0}
       maxW={["container.sm", "container.md", "container.lg", "8xl"]}
       mx="auto"
     >
-      <VStack spacing={6} flex="2" borderRight="1px" borderColor="gray.200" pr={10}>
+      <VStack
+        spacing={6}
+        flex="2"
+        borderRight={hasTrending ? "1px" : 0}
+        borderColor="gray.200"
+        pr={10}
+      >
         <Heading size="xl" mb={4} alignSelf="center">
           {search ? `${t("petition.search_results_for")} "${search}"` : t("petition.petitions")}
         </Heading>
@@ -150,14 +157,16 @@ export const PetitionsSection = () => {
         {isSuccess && <PetitionsList isLoading={isFetching || isLoading} petitions={data} />}
       </VStack>
 
-      <VStack spacing={6} flex="1" pl={7}>
-        <Heading size="xl" mb={4}>
-          Trending
-        </Heading>
-        <PopularPetitionsList
-          petitions={popularPetitionsData.slice(0, 5) as unknown as Petition[]}
-        />
-      </VStack>
+      {hasTrending && (
+        <VStack spacing={6} flex="1" pl={7}>
+          <Heading size="xl" mb={4}>
+            Trending
+          </Heading>
+          <PopularPetitionsList
+            petitions={popularPetitionsData.slice(0, 5) as unknown as Petition[]}
+          />
+        </VStack>
+      )}
     </HStack>
   );
 };
