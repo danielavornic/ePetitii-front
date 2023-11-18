@@ -37,7 +37,7 @@ export const Header = () => {
 
   const handleSubmit = (term: string) => {
     push({
-      pathname: "/",
+      pathname: "/petitions",
       query: { search: term },
     });
   };
@@ -169,6 +169,7 @@ export const Header = () => {
                 />
                 <InputRightElement>
                   <IconButton
+                    type="submit"
                     colorScheme="blue"
                     aria-label={t("search_placeholder")}
                     rounded="full"

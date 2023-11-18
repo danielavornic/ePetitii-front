@@ -17,7 +17,7 @@ interface Initiator {
   birthdate: string;
 }
 
-interface Signer {
+export interface Signer {
   name: string;
   surname: string;
   idnp: string;
@@ -39,6 +39,7 @@ export interface Petition {
   currSigns: number;
   neededSigns: number;
   description: string;
+  region: Category;
   receiver: string;
   status: PetitionStatus;
   signers: Signer[];
