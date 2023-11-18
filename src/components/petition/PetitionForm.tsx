@@ -13,7 +13,7 @@ import {
 } from "@chakra-ui/react";
 import Select from "react-select";
 import { Category, PetitionFormData } from "@/types";
-
+import { Editor } from "@tinymce/tinymce-react";
 import wash from "washyourmouthoutwithsoap";
 import { useQuery } from "@tanstack/react-query";
 import { regions, categories as categoriesApi, receivers as receiversApi } from "@/api";
@@ -51,6 +51,11 @@ export const PetitionForm = ({
   const isPrimar = receiver === 3;
   const { user } = useSelector(selectUser);
 
+  const extractText = (htmlString: stirng) => {
+    // Use a regular expression to remove all HTML tags
+    return htmlString.replace(/<[^>]*>/g, "");
+  };
+
   useEffect(() => {
     if (user?.region) {
       setFormData({ ...formData, region: user.region });
@@ -78,7 +83,7 @@ export const PetitionForm = ({
     !description ||
     !categories.length ||
     !receiver ||
-    description.length < 100 ||
+    extractText(description).length < 50 ||
     (isPrimar && !region) ||
     !isChecked ||
     !isConsented;
@@ -106,12 +111,29 @@ export const PetitionForm = ({
 
     const isProfane = wash.check("ro", e.target.value);
 
-    if (e.target.name === "description" && e.target.value.length < 100) {
-      setErrors({ ...errors, description: "Conținutul trebuie să aibă minim 100 caractere" });
+    if (e.target.name === "description" && extractText(e.target.value).length < 50) {
+      setErrors({ ...errors, description: "Conținutul trebuie să aibă minim 50 caractere" });
     } else if (isProfane) {
       setErrors({ ...errors, description: "Conținutul petiției conține cuvinte obscene" });
     } else {
       setErrors({ ...errors, description: "" });
+    }
+  };
+
+  const handleEditorChange = (content: string) => {
+    setFormData({ ...formData, description: content });
+    console.log(extractText(content).length);
+
+    // // Validation logic for description content
+    if (extractText(content).length < 50) {
+      setErrors({ ...errors, description: "Conținutul trebuie să aibă minim 50 caractere" });
+    } else {
+      setErrors({ ...errors, description: "" });
+    }
+
+    const isProfane = wash.check("ro", content);
+    if (isProfane) {
+      setErrors({ ...errors, description: "Conținutul petiției conține cuvinte obscene" });
     }
   };
 
@@ -142,24 +164,32 @@ export const PetitionForm = ({
 
         <FormControl isInvalid={!!errors.description}>
           <FormLabel fontWeight="bold" fontSize="xl">
-            Conținut*
+            Conținut
           </FormLabel>
           <FormHelperText fontSize="sm" color="gray.500" mb={4}>
-            Conținutul petiției trebuie să fie detaliat și să conțină minim 100 de caractere.
+            Continutul insuficient
           </FormHelperText>
-          <Textarea
-            placeholder="Conținut"
-            name="description"
+          <Editor
             value={description}
-            onChange={handleChange}
-            h="300px"
-            maxLength={2000}
-            fontSize="lg"
+            init={{
+              height: 300,
+              menubar: true,
+              plugins: [
+                "advlist autolink lists link image charmap print preview anchor",
+                "searchreplace visualblocks code fullscreen",
+                "insertdatetime media table paste code help wordcount",
+              ],
+              toolbar:
+                "formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat",
+              block_formats:
+                "Paragraph=p; Header 1=h1; Header 2=h2; Header 3=h3; Header 4=h4; Header 5=h5; Header 6=h6",
+            }}
+            onEditorChange={handleEditorChange}
           />
           <HStack w="full" justifyContent={errors.description ? "space-between" : "flex-end"}>
             <FormErrorMessage>{errors.description}</FormErrorMessage>
             <FormHelperText fontSize="sm" color="gray.500" textAlign="right">
-              {description.length}/2000 caractere
+              {extractText(description).length}/2000 caractere
             </FormHelperText>
           </HStack>
         </FormControl>
