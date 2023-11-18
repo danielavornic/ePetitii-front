@@ -5,4 +5,5 @@ export interface User {
   idnp: string;
   region: 1;
   birthdate: string;
+  isSubscribed?: boolean;
 }

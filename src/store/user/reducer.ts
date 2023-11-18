@@ -1,5 +1,5 @@
 import { User } from "@/types";
-import { LOGIN, LOGOUT } from "./actions";
+import { LOGIN, LOGOUT, SUBSCRIBE } from "./actions";
 
 interface UserState {
   user: User | null;
@@ -23,6 +23,14 @@ export const userReducer = (state = initialState, action: any): UserState => {
       return {
         ...state,
         user: null,
+      };
+    case SUBSCRIBE:
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          isSubscribed: true,
+        },
       };
     default:
       return state;

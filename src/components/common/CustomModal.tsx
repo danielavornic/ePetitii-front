@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Modal,
   ModalOverlay,
@@ -17,11 +17,14 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import { useQuery } from "@tanstack/react-query";
-import { OptionBase, Select } from "chakra-react-select";
+import { ActionMeta, MultiValue, OptionBase, Select } from "chakra-react-select";
 import { useRouter } from "next/router";
 import { Category } from "@/types";
 import { categories as categoriesApi } from "@/api";
 import { useTranslations } from "next-intl";
+import { useDispatch, useSelector } from "react-redux";
+import { selectUser } from "@/store/selectors";
+import { subscribe } from "@/store/user";
 
 interface OptionType extends OptionBase {
   value: string;
@@ -34,7 +37,7 @@ export const CustomModal: React.FC = () => {
   const [isInvalid, setIsInvalid] = useState(false);
   const [email, setEmail] = useState("");
   const [wasSubmitted, setWasSubmitted] = useState(false);
-  const { query, push, locale } = useRouter();
+  const { locale } = useRouter();
 
   const { data: categories, isSuccess: isCategoriesSuccess } = useQuery({
     queryKey: ["modalCategories"],
@@ -83,11 +86,21 @@ export const CustomModal: React.FC = () => {
       console.log("Valid email:", email);
       // Handle valid submission here
     }
+
+    dispatch(subscribe());
   };
+
+  const { user } = useSelector(selectUser);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (user && !user.isSubscribed) {
+      onOpen();
+    }
+  }, [user]);
 
   return (
     <>
-      <Button onClick={onOpen}>Open Modal</Button>
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
