@@ -55,5 +55,19 @@
   },
   "filter": {
     "only_my_region": "Doar din regiunea mea"
+  },
+  "modal": {
+    "header": "Alegeți Categoriile Dumneavoastră și Abonați-vă Acum",
+    "description": "Abonați-vă la newsletter-ul nostru și primiți cele mai recente actualizări despre petițiile care sunt importante pentru dumneavoastră. Selectați categoriile preferate și nu pierdeți nicio șansă de a face o diferență.",
+    "subscribe": "Abonează-te",
+    "cancel": "Anulează"
+  },
+  "errors": {
+    "invalidEmail": "Adresa de email nu este validă",
+    "categoryRequired": "Categoria e obligatorie"
+  },
+  "placeholders": {
+    "selectCategory": "Selecteaza categoria",
+    "enterEmail": "Introduce email"
   }
 }

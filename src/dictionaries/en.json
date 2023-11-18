@@ -56,5 +56,19 @@
   },
   "filter": {
     "only_my_region": "Only from my region"
+  },
+  "modal": {
+    "header": "Choose Your Categories & Subscribe Now",
+    "description": "Subscribe to our newsletter and get the latest updates on petitions that matter to you. Select your preferred categories and never miss a chance to make a difference.",
+    "subscribe" : "Subscribe",
+    "cancel" : "Cancel"
+  },
+  "errors": {
+    "invalidEmail": "Email is invalid",
+    "categoryRequired": "Category is required"
+  },
+  "placeholders": {
+    "selectCategory": "Select category",
+    "enterEmail": "Enter your email"
   }
 }
