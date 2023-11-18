@@ -40,7 +40,7 @@ export interface Petition {
   neededSigns: number;
   description: string;
   region: Category;
-  receiver: string;
+  receiver: Category;
   status: PetitionStatus;
   signers: Signer[];
   deadline: string;

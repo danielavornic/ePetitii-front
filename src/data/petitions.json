@@ -13,8 +13,25 @@
     "currSigns": 2500,
     "neededSigns": 5000,
     "description": "Cerem guvernului să ofere susținere financiară și resurse pentru dezvoltarea tinerilor în domeniul tehnologic.",
-    "receiver": "Ministerului Educației",
-    "status": "Deschis",
+    "receiver": {
+      "id": 3,
+      "name": "Primar",
+      "i18n": {
+        "en": "Mayor",
+        "ro": "Primar",
+        "ru": "Мэр"
+      }
+    },
+    "status": "pending",
+    "region": {
+      "id": 1,
+      "name": "mun. Chişinău",
+      "i18n": {
+        "en": "Municipality of Chișinău",
+        "ro": "mun. Chişinău",
+        "ru": "г. Кишинёв"
+      }
+    },
     "signers": [
       {
         "name": "Robert",
@@ -53,13 +70,30 @@
       "region": "București",
       "birthdate": "1980-07-05"
     },
+    "region": {
+      "id": 1,
+      "name": "mun. Chişinău",
+      "i18n": {
+        "en": "Municipality of Chișinău",
+        "ro": "mun. Chişinău",
+        "ru": "г. Кишинёв"
+      }
+    },
     "name": "Construirea unei parcuri de distracții în oraș.",
     "date": "2023-05-19T00:00:00.000Z",
     "currSigns": 1200,
     "neededSigns": 3000,
     "description": "Solicităm autorităților locale construirea unui parc de distracții pentru a spori oferta de agrement în oraș.",
-    "receiver": "Primăriei municipiului",
-    "status": "Deschis",
+    "receiver": {
+      "id": 3,
+      "name": "Primar",
+      "i18n": {
+        "en": "Mayor",
+        "ro": "Primar",
+        "ru": "Мэр"
+      }
+    },
+    "status": "pending",
     "signers": [
       {
         "name": "Maria",
@@ -98,13 +132,30 @@
       "region": "Iași",
       "birthdate": "1997-12-08"
     },
+    "region": {
+      "id": 1,
+      "name": "mun. Chişinău",
+      "i18n": {
+        "en": "Municipality of Chișinău",
+        "ro": "mun. Chişinău",
+        "ru": "г. Кишинёв"
+      }
+    },
     "name": "Susținere pentru dezvoltarea comunităților rurale.",
     "date": "2023-05-19T00:00:00.000Z",
     "currSigns": 3500,
     "neededSigns": 7000,
     "description": "Cerem guvernului și autorităților locale să acorde mai multe resurse pentru dezvoltarea comunităților rurale.",
-    "receiver": "Guvernului României",
-    "status": "Deschis",
+    "receiver": {
+      "id": 3,
+      "name": "Primar",
+      "i18n": {
+        "en": "Mayor",
+        "ro": "Primar",
+        "ru": "Мэр"
+      }
+    },
+    "status": "pending",
     "signers": [
       {
         "name": "Alexandru",

@@ -22,11 +22,11 @@ export const PetitionCard = ({ petition }: PetitionCardProps) => {
 
   const dateSplit = date ? date?.split("T")[0] : "";
   const progressColor =
-    status === PetitionStatus.approved
+    status === PetitionStatus.approved || status === PetitionStatus.pending
       ? "green"
       : status === PetitionStatus.rejected
         ? "red"
-        : status === PetitionStatus.pending_review || status === PetitionStatus.pending
+        : status === PetitionStatus.pending_review
           ? "blue"
           : "yellow";
 

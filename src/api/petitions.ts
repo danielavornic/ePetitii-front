@@ -23,8 +23,13 @@ export const petitions = {
     return data;
   },
 
-  sign: async (id: number, body: { initatior_idnp: string }) => {
+  sign: async (id: number, body: { initation_idnp: string }) => {
     const { data } = await axios.post(`/petitions/${id}/sign`, body);
+    return data;
+  },
+
+  translate: async (id: number, body: { locale: string }) => {
+    const { data } = await axios.post(`/petitions/${id}/translate`, body);
     return data;
   },
 };

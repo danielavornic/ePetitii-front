@@ -86,8 +86,6 @@ export const CustomModal: React.FC = () => {
       console.log("Valid email:", email);
       // Handle valid submission here
     }
-
-    dispatch(subscribe());
   };
 
   const { user } = useSelector(selectUser);
@@ -96,6 +94,7 @@ export const CustomModal: React.FC = () => {
   useEffect(() => {
     if (user && !user.isSubscribed) {
       onOpen();
+      dispatch(subscribe());
     }
   }, [user]);
 

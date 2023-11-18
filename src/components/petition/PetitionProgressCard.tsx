@@ -12,6 +12,7 @@ import { Petition, PetitionStatus } from "@/types";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 interface PetitionProgressCardProps {
   petition: Petition;
@@ -20,6 +21,7 @@ interface PetitionProgressCardProps {
 export const PetitionProgressCard = ({ petition }: PetitionProgressCardProps) => {
   const { user } = useSelector(selectUser);
   const { id, status, currSigns, neededSigns, deadline, initiator, signers, region } = petition;
+  const t = useTranslations("petition");
 
   const progressColor =
     status === PetitionStatus.approved || status === PetitionStatus.pending
@@ -55,15 +57,14 @@ export const PetitionProgressCard = ({ petition }: PetitionProgressCardProps) =>
   } else if (initiator.idnp !== user?.idnp) {
     const signedByUser = signers && signers.find((signer) => signer.idnp === user?.idnp);
     const isAllowedFromRegion =
-      (!!petition?.region && user.region === petition?.region.id) || petition.receiver !== "Primar";
+      (!!petition?.region && user.region === petition?.region.id) ||
+      petition.receiver.name !== "Primar";
 
     const nowAllowedButtonProps = {
       ...commonButtonProps,
       variant: "link",
       fontWeight: 500,
       colorScheme: "red",
-      // whiteSpace: "pre-line",
-      // pointerEvents: "none",
     };
 
     signButton = (
@@ -118,7 +119,7 @@ export const PetitionProgressCard = ({ petition }: PetitionProgressCardProps) =>
           </CircularProgress>
           <VStack>
             <Text fontSize="md" fontFamily="serif" fontWeight="bold">
-              {petition.status}
+              {t(`status.${petition.status}`)}
             </Text>
             <Text fontSize="sm" fontFamily="serif" mt={2}>
               {daysLeft < 1 ? "60" : daysLeft} zile rămase

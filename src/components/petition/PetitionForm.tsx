@@ -114,6 +114,7 @@ export const PetitionForm = ({
       setErrors({ ...errors, description: "" });
     }
   };
+  console.log(wash.words("ro"));
 
   return (
     <form onSubmit={handleSubmit} id="petitie-form">

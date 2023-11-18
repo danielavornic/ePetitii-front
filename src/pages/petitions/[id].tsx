@@ -27,6 +27,7 @@ import { selectUser } from "@/store/selectors";
 import { useRouter } from "next/router";
 import { Signer } from "@/types";
 import { msignImage } from "@/constants";
+import { useState } from "react";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -38,7 +39,7 @@ const Petition = () => {
   const fullName = user?.name + " " + user?.surname;
 
   const {
-    data: petitie,
+    data: petition,
     isLoading,
     isSuccess,
   } = useQuery({
@@ -46,9 +47,26 @@ const Petition = () => {
     queryFn: () => petitions.getById(Number(id)),
   });
 
-  const voters = petitie?.signers || [];
+  const [isTranslated, setIsTranslated] = useState(false);
+  const { data: translatedPetition } = useQuery({
+    queryKey: ["petition-t", id, locale],
+    queryFn: () => petitions.translate(Number(id), { locale: locale as "ro" | "ru" | "en" }),
+    enabled: isTranslated,
+  });
 
-  const hasInitiatedPetition = petitie?.initiator.idnp === user?.idnp;
+  const data = isTranslated ? translatedPetition : petition;
+  const { name, description, region, receiver } = data || {
+    name: "",
+    description: "",
+    categories: [],
+    region: 0,
+    receiver: 0,
+    isChecked: false,
+    isConsented: false,
+  };
+
+  const hasInitiatedPetition = petition?.initiator.idnp === user?.idnp;
+  const voters = petition?.signers || [];
 
   const generatePDF = async () => {
     const documentDefinition = {
@@ -58,7 +76,7 @@ const Petition = () => {
             { width: "*", text: "" },
             {
               width: "auto",
-              text: `${petitie?.date?.split("T")[0]}, ${user?.region}`,
+              text: `${petition?.date?.split("T")[0]}, ${user?.region}`,
               fontSize: 10,
               alignment: "right",
             },
@@ -67,13 +85,13 @@ const Petition = () => {
           marginTop: 10,
         },
         {
-          text: petitie?.name,
+          text: petition?.name,
           fontSize: 16,
           bold: true,
           marginTop: 20,
           alignment: "center",
         },
-        { text: petitie?.description, fontSize: 12, marginTop: 24 },
+        { text: petition?.description, fontSize: 12, marginTop: 24 },
         {
           text: [{ text: "Inițiat de: ", bold: true }, fullName],
           fontSize: 12,
@@ -112,6 +130,8 @@ const Petition = () => {
     pdfDocument.download(`Petition-#${id}.pdf`);
   };
 
+  console.log(region);
+
   return (
     <Layout isFull>
       {isLoading ? (
@@ -140,54 +160,86 @@ const Petition = () => {
           <Container maxW="8xl" px={0} pb="100px">
             <HStack spacing={24} my={8} alignItems="start" position="relative">
               <VStack w="full" align={"flex-start"} justifyContent="start">
+                {isTranslated ? (
+                  <Button size="sm" colorScheme="gray" onClick={() => setIsTranslated(false)}>
+                    Vezi originalul
+                  </Button>
+                ) : (
+                  <Button size="sm" colorScheme="gray" onClick={() => setIsTranslated(true)}>
+                    Tradu
+                  </Button>
+                )}
+
                 <Heading as="h2" size="2xl" lineHeight="normal" my={4}>
-                  {petitie.name}
+                  {name}
                 </Heading>
 
-                <Heading as="h3" size="sm" pt={4} pb={2} fontFamily="serif" fontWeight={400}>
-                  <span style={{ fontWeight: "bold" }}>Inițiator:</span> {fullName}
-                </Heading>
+                <VStack spacing={4} pt={4} align="start" w="full">
+                  <Heading as="h3" size="sm" fontWeight={400}>
+                    <Text as="span" fontWeight="bold" fontFamily="serif">
+                      Inițiator:
+                    </Text>{" "}
+                    {fullName}
+                  </Heading>
 
-                <Heading as="h3" size="sm" fontFamily="serif" pb={2} fontWeight={400}>
-                  <span style={{ fontWeight: "bold" }}>Data depunerii:</span>{" "}
-                  {petitie.date?.split("T")[0]}
-                </Heading>
-                {petitie.deadline && (
-                  <Heading as="h3" size="sm" fontFamily="serif" fontWeight={400}>
-                    <span style={{ fontWeight: "bold" }}>Data limită:</span>{" "}
-                    {petitie.deadline.split("T")[0]}
+                  <Heading as="h3" size="sm" fontWeight={400}>
+                    <Text as="span" fontWeight="bold" fontFamily="serif">
+                      Data depunerii:
+                    </Text>{" "}
+                    {petition.date?.split("T")[0]}
                   </Heading>
-                )}
-                {petitie?.region && (
-                  <Heading as="h3" size="sm" fontFamily="serif" pt={2} fontWeight={400}>
-                    <span style={{ fontWeight: "bold" }}>Locație:</span> {petitie.region.name}
+
+                  {petition.deadline && (
+                    <Heading as="h3" size="sm" fontWeight={400}>
+                      <Text as="span" fontWeight="bold" fontFamily="serif">
+                        Data limită:
+                      </Text>{" "}
+                      {petition.deadline.split("T")[0]}
+                    </Heading>
+                  )}
+                  <Heading as="h3" size="sm" fontWeight={400}>
+                    <Text as="span" fontWeight="bold" fontFamily="serif">
+                      Destinatar:
+                    </Text>{" "}
+                    {petition.receiver.i18n[locale as "ro" | "ru" | "en"]}{" "}
                   </Heading>
-                )}
+                  {region && (
+                    <Heading as="h3" size="sm" fontWeight={400}>
+                      <Text as="span" fontWeight="bold" fontFamily="serif">
+                        Regiune:
+                      </Text>{" "}
+                      {region.i18n[locale as "ro" | "ru" | "en"]}
+                    </Heading>
+                  )}
+                  <HStack>
+                    <Heading as="h3" size="sm" fontWeight={400}>
+                      <Text as="span" fontWeight="bold" fontFamily="serif">
+                        Categorii:
+                      </Text>{" "}
+                    </Heading>
+                    <HStack spacing={2}>
+                      {petition.categories.map((category) => (
+                        <Tag colorScheme="primary" key={category.id}>
+                          {category.i18n[locale as "ro" | "ru" | "en"]}
+                        </Tag>
+                      ))}
+                    </HStack>
+                  </HStack>
+                </VStack>
 
                 <Text fontSize="lg" pt={8} pb={2} whiteSpace="pre-line">
-                  {petitie.description}
+                  {description}
                 </Text>
-
-                <HStack pt={4} pb={2}>
-                  <Heading as="h3" size="sm" fontFamily="serif" fontWeight={400}>
-                    <span style={{ fontWeight: "bold" }}>Categorii:</span>{" "}
-                  </Heading>
-                  <HStack spacing={2}>
-                    {petitie.categories.map((category) => (
-                      <Tag key={category.id}>{category.i18n[locale as "ro" | "ru" | "en"]}</Tag>
-                    ))}
-                  </HStack>
-                </HStack>
               </VStack>
               <Box w="280px" position="sticky" top={4}>
-                <PetitionProgressCard petition={petitie} />
+                <PetitionProgressCard petition={petition} />
                 {hasInitiatedPetition && (
                   <Button w="full" colorScheme="gray" mt={8} onClick={generatePDF}>
                     Salvează ca PDF
                   </Button>
                 )}
                 <VStack w="full" align={"flex-start"} justifyContent="start" spacing={4} pt={12}>
-                  <Heading as="h3" size="sm" fontFamily="serif" fontWeight={400}>
+                  <Heading as="h3" size="sm" fontWeight={400}>
                     Distribuie petiția
                   </Heading>
                   <HStack spacing={4}>
