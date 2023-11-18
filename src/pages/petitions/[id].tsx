@@ -28,6 +28,7 @@ import { useRouter } from "next/router";
 import { Signer } from "@/types";
 import { msignImage } from "@/constants";
 import { useState } from "react";
+import Share from "@/components/petition/Share";
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
@@ -76,7 +77,9 @@ const Petition = () => {
             { width: "*", text: "" },
             {
               width: "auto",
-              text: `${petition?.date?.split("T")[0]}, ${user?.region}`,
+              text: `${petition?.date?.split("T")[0]}, ${petition?.region.i18n[
+                locale as "ro" | "ru" | "en"
+              ]}`,
               fontSize: 10,
               alignment: "right",
             },
@@ -104,7 +107,7 @@ const Petition = () => {
         },
         { text: "Lista semnatarilor:", fontSize: 12, marginTop: 6, bold: true },
         {
-          ol: voters.map((voter: Signer) => ({ text: voter.name })),
+          ol: voters.map((voter: Signer) => ({ text: `${voter.name} ${voter.surname}` })),
           fontSize: 10,
           marginTop: 5,
         },
@@ -129,8 +132,6 @@ const Petition = () => {
 
     pdfDocument.download(`Petition-#${id}.pdf`);
   };
-
-  console.log(region);
 
   return (
     <Layout isFull>
@@ -238,21 +239,7 @@ const Petition = () => {
                     Salvează ca PDF
                   </Button>
                 )}
-                <VStack w="full" align={"flex-start"} justifyContent="start" spacing={4} pt={12}>
-                  <Heading as="h3" size="sm" fontWeight={400}>
-                    Distribuie petiția
-                  </Heading>
-                  <HStack spacing={4}>
-                    <IconButton
-                      aria-label="Share on Facebook"
-                      icon={<FaFacebook />}
-                      rounded="full"
-                    />
-                    <IconButton aria-label="Share on Twitter" icon={<FaTwitter />} rounded="full" />
-                    <IconButton aria-label="Share on Email" icon={<FaEnvelope />} rounded="full" />
-                    <IconButton aria-label="Copy link" icon={<FaLink />} rounded="full" />
-                  </HStack>
-                </VStack>
+                <Share />
               </Box>
             </HStack>
           </Container>
