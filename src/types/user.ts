@@ -1,8 +1,8 @@
 export interface User {
   name: string;
   surname: string;
-  email: string;
+  email?: string;
   idnp: string;
-  region: string;
+  region: 1;
   birthdate: string;
 }

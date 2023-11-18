@@ -12,11 +12,14 @@ const initialState: UserState = {
 export const userReducer = (state = initialState, action: any): UserState => {
   switch (action.type) {
     case LOGIN:
+      localStorage.setItem("user", JSON.stringify(action.payload));
+      console.log(action.payload);
       return {
         ...state,
         user: action.payload,
       };
     case LOGOUT:
+      localStorage.removeItem("user");
       return {
         ...state,
         user: null,

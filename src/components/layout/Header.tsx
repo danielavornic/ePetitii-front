@@ -1,3 +1,8 @@
+import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
+import { useRouter } from "next/router";
+import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Text,
   Button,
@@ -15,19 +20,14 @@ import {
 } from "@chakra-ui/react";
 import { SearchIcon } from "@chakra-ui/icons";
 import { FaPlus } from "react-icons/fa";
-import { useEffect, useState } from "react";
-import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors";
-import { logout } from "@/store/user";
-import { useRouter } from "next/router";
-import { useTranslations } from "next-intl";
-import { LanguageSwitcher } from "../common";
+import { login, logout } from "@/store/user";
+import { LanguageSwitcher } from "@/components";
 
 export const Header = () => {
   const t = useTranslations("header");
 
-  const { query, push, asPath } = useRouter();
+  const { query, push } = useRouter();
   const { search } = query;
 
   const { user } = useSelector(selectUser);
@@ -37,13 +37,18 @@ export const Header = () => {
 
   const handleSubmit = (term: string) => {
     push({
-      pathname: "/petitions",
+      pathname: "/",
       query: { search: term },
     });
   };
 
   useEffect(() => {
     setSearchTerm(search || "");
+
+    const userLocal = localStorage.getItem("user");
+    if (userLocal) {
+      dispatch(login(JSON.parse(userLocal)));
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -92,7 +97,7 @@ export const Header = () => {
                 {t("help")}
               </Button>
               <Box width="1px" height="20px" backgroundColor="gray.200" marginX="0.5rem" />
-              {user ? (
+              {user !== null ? (
                 <HStack spacing={2}>
                   <Link href="/profile">
                     <Text fontSize="sm" fontWeight="light" _hover={{ textDecoration: "underline" }}>
