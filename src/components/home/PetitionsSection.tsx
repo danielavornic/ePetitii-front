@@ -1,18 +1,9 @@
 import { useRouter } from "next/router";
 import { useTranslations } from "next-intl";
-import {
-  HStack,
-  VStack,
-  Heading,
-  Select,
-  Button,
-  Tab,
-  TabList,
-  Tabs,
-  Checkbox,
-} from "@chakra-ui/react";
+import { HStack, VStack, Heading, Button, Tab, TabList, Tabs, Checkbox } from "@chakra-ui/react";
 import { useQuery } from "@tanstack/react-query";
 import { useSelector } from "react-redux";
+import Select from "react-select";
 
 import { Category, Petition, PetitionStatus } from "@/types";
 import { petitions, categories as categoriesApi } from "@/api";
@@ -109,19 +100,18 @@ export const PetitionsSection = ({ hasTrending = true }: { hasTrending?: boolean
           )}
           <HStack w="full" justifyContent="space-between" alignItems="center">
             <Select
-              w="xs"
-              rounded="full"
-              defaultValue={category}
-              onChange={(e) => setCategory(e.target.value)}
-            >
-              {isCategoriesSuccess &&
-                categories?.length &&
-                categories.map((category: Category) => (
-                  <option value={category.id} key={category.id}>
-                    {category.i18n[locale as "ro" | "ru" | "en"]}
-                  </option>
-                ))}
-            </Select>
+              styles={{
+                control: (provided) => ({
+                  ...provided,
+                  minWidth: "300px",
+                }),
+              }}
+              onChange={(option: any) => setCategory(option ? option.value : undefined)}
+              options={categories?.map((category: Category) => ({
+                label: category.i18n[locale as "ro" | "ru" | "en"],
+                value: category.id,
+              }))}
+            />
 
             <HStack h="40px" spacing={4}>
               <Button

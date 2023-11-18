@@ -27,9 +27,4 @@ export const petitions = {
     const { data } = await axios.post(`/petitions/${id}/sign`, body);
     return data;
   },
-
-  translate: async (id: number, body: { locale: string }) => {
-    const { data } = await axios.post(`/petitions/${id}/translate`, body);
-    return data;
-  },
 };

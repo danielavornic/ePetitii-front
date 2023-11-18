@@ -74,7 +74,7 @@ export const PetitionProgressCard = ({ petition }: PetitionProgressCardProps) =>
           {...(!isAllowedFromRegion && nowAllowedButtonProps)}
         >
           {signedByUser
-            ? "Ați signers petiția"
+            ? "Ați semnat petiția"
             : isAllowedFromRegion
               ? "Semnați petiția"
               : "Petiție indisponibilă \nîn regiunea dvs."}

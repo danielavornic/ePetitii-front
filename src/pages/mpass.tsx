@@ -16,13 +16,18 @@ const user1: User = {
 
 const MPass = () => {
   const dispatch = useDispatch();
-  const { push } = useRouter();
+  const { push, query } = useRouter();
+  const { petitionId } = query;
   const [img, setImg] = useState("/images/mpass-screen.png");
 
   const handleClick = () => {
     if (img === "/images/mpass-screen-filled.png") {
       dispatch(login(user1));
-      push("/");
+      if (petitionId) {
+        push(`/petitions/${petitionId}`);
+      } else {
+        push("/");
+      }
     } else {
       setImg("/images/mpass-screen-filled.png");
     }

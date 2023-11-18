@@ -45,6 +45,7 @@ export interface Petition {
   signers: Signer[];
   deadline: string;
   categories: Category[];
+  locale?: string; //for translation
 }
 
 export interface PetitionCreate {
@@ -54,4 +55,9 @@ export interface PetitionCreate {
   receiver: number;
   region?: number;
   categories: number[];
+}
+
+export interface PetitionFormData extends PetitionCreate {
+  isChecked: boolean;
+  isConsented: boolean;
 }

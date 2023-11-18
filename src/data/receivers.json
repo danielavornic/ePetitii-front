@@ -1,6 +1,6 @@
 [
   {
-    "id": "guvern",
+    "id": 0,
     "name": "Guvern",
     "i18n": {
       "en": "Government",
@@ -9,7 +9,7 @@
     }
   },
   {
-    "id": "parlament",
+    "id": 1,
     "name": "Parlament",
     "i18n": {
       "en": "Parliament",
@@ -18,7 +18,7 @@
     }
   },
   {
-    "id": "presedinte",
+    "id": 2,
     "name": "Președinte",
     "i18n": {
       "en": "President",
@@ -27,7 +27,7 @@
     }
   },
   {
-    "id": "primar",
+    "id": 3,
     "name": "Primar",
     "i18n": {
       "en": "Mayor",
