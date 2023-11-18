@@ -1,0 +1,38 @@
+[
+  {
+    "id": "guvern",
+    "name": "Guvern",
+    "i18n": {
+      "en": "Government",
+      "ro": "Guvern",
+      "ru": "Правительство"
+    }
+  },
+  {
+    "id": "parlament",
+    "name": "Parlament",
+    "i18n": {
+      "en": "Parliament",
+      "ro": "Parlament",
+      "ru": "Парламент"
+    }
+  },
+  {
+    "id": "presedinte",
+    "name": "Președinte",
+    "i18n": {
+      "en": "President",
+      "ro": "Președinte",
+      "ru": "Президент"
+    }
+  },
+  {
+    "id": "primar",
+    "name": "Primar",
+    "i18n": {
+      "en": "Mayor",
+      "ro": "Primar",
+      "ru": "Мэр"
+    }
+  }
+]

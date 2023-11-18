@@ -1,3 +1,59 @@
 {
-  "hi": "Salut"
+  "header": {
+    "official_website": "Site-ul oficial al Preşedinţiei RM",
+    "help": "Ajutor",
+    "user": {
+      "profile": "Profil",
+      "logout": "Ieșire"
+    },
+    "authentication": "Autentificare",
+    "site_logo": "PETIŢII ELECTRONICE",
+    "official_representation": "Reprezentanţa oficială online a Preşedenţiei RM",
+    "search_placeholder": "Căutaţi petiţia",
+    "create_petition": "Creaţi o petiţie"
+  },
+  "footer": {
+    "copyright": "Guvernul Republicii Moldova. Toate drepturile rezervate.",
+    "administration": "Administrare tehnico-tehnologică",
+    "service": "Serviciul Tehnologia Informației și Securitate Cibernetică",
+    "links": {
+      "government": "Guvernul",
+      "presidency": "Preşedinţia",
+      "constitution": "Constituţia",
+      "contacts": "Contacte",
+      "developers": "Developers"
+    }
+  },
+  "home": {
+    "hero": {
+      "description": "Platformă pentru semnarea şi publicarea petiţiilor electronice validată în Republica Moldova",
+      "headline": {
+        "part1": "Dă voce comunității tale",
+        "part2": "și schimbă viitorul!"
+      }
+    }
+  },
+  "petition": {
+    "status": {
+      "pending_review": "În revizuire",
+      "approved": "Aprobată",
+      "rejected": "Respinsă",
+      "pending": "În colectare",
+      "in_progress": "În progres",
+      "completed": "Completată"
+    },
+    "signatures": "Semnături",
+    "initiated_by": "Inițiată de",
+    "remaining_days": "Zile rămase",
+    "petition": "Petiție",
+    "petitions": "Petiții",
+    "search_results_for": "Rezultatele căutării pentru"
+  },
+  "sort": {
+    "newest": "Cele mai noi",
+    "most_popular": "Cele mai populare"
+  },
+  "filter": {
+    "only_my_region": "Doar din regiunea mea"
+  }
 }

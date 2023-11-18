@@ -1,0 +1,65 @@
+[
+  {
+    "id": "mun_chisinau",
+    "name": "mun. Chişinău",
+    "i18n": {
+      "en": "Municipality of Chișinău",
+      "ro": "mun. Chişinău",
+      "ru": "г. Кишинёв"
+    }
+  },
+  {
+    "id": "mun_balti",
+    "name": "mun. Bălţi",
+    "i18n": {
+      "en": "Municipality of Bălți",
+      "ro": "mun. Bălţi",
+      "ru": "г. Бельцы"
+    }
+  },
+  {
+    "id": "mun_bender",
+    "name": "mun. Bender",
+    "i18n": {
+      "en": "Municipality of Bender",
+      "ro": "mun. Bender",
+      "ru": "г. Бендеры"
+    }
+  },
+  {
+    "id": "uta_gagauzia",
+    "name": "UTA Găgăuzia",
+    "i18n": {
+      "en": "Gagauzia Territorial-Administrative Unit",
+      "ro": "UTA Găgăuzia",
+      "ru": "Гагаузия, территориально-административная единица"
+    }
+  },
+  {
+    "id": "mun_comrat",
+    "name": "mun. Comrat",
+    "i18n": {
+      "en": "Municipality of Comrat",
+      "ro": "mun. Comrat",
+      "ru": "г. Комрат"
+    }
+  },
+  {
+    "id": "mun_tiraspol",
+    "name": "mun. Tiraspol",
+    "i18n": {
+      "en": "Municipality of Tiraspol",
+      "ro": "mun. Tiraspol",
+      "ru": "г. Тирасполь"
+    }
+  },
+  {
+    "id": "uat_stinga_nistrului",
+    "name": "UAT din Stînga Nistrului",
+    "i18n": {
+      "en": "Administrative-Territorial Units of the Left Bank of the Dniester",
+      "ro": "UAT din Stînga Nistrului",
+      "ru": "Административно-территориальные единицы на левом берегу Днестра"
+    }
+  }
+]

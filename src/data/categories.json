@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "name": "Educatie",
+    "i18n": {
+      "en": "Education",
+      "ro": "Educatie",
+      "ru": "Образование"
+    }
+  },
+  {
+    "id": 2,
+    "name": "Mediu",
+    "i18n": {
+      "en": "Environment",
+      "ro": "Mediu",
+      "ru": "Окружающая среда"
+    }
+  },
+  {
+    "id": 3,
+    "name": "Sanatate",
+    "i18n": {
+      "en": "Health",
+      "ro": "Sanatate",
+      "ru": "Здоровье"
+    }
+  },
+  {
+    "id": 4,
+    "name": "Tehnologie",
+    "i18n": {
+      "en": "Technology",
+      "ro": "Tehnologie",
+      "ru": "Технологии"
+    }
+  },
+  {
+    "id": 5,
+    "name": "Cultura",
+    "i18n": {
+      "en": "Culture",
+      "ro": "Cultura",
+      "ru": "Культура"
+    }
+  },
+  {
+    "id": 6,
+    "name": "Infrastructura",
+    "i18n": {
+      "en": "Infrastructure",
+      "ro": "Infrastructura",
+      "ru": "Инфраструктура"
+    }
+  }
+]

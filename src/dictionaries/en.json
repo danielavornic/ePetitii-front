@@ -1,3 +1,60 @@
 {
-  "hi": "Hi"
+  "header": {
+    "official_website": "The official website of the Presidency of the RM",
+    "help": "Help",
+    "user": {
+      "profile": "Profile",
+      "logout": "Logout"
+    },
+    "authentication": "Login",
+    "site_logo": "ELECTRONIC PETITIONS",
+    "official_representation": "Official online representation of the Presidency of RM",
+    "search_placeholder": "Search petitions",
+    "create_petition": "Create a petition"
+  },
+  "footer": {
+    "copyright": "Government of the Republic of Moldova. All rights reserved.",
+    "administration": "Technical and technological administration",
+    "service": "Information Technology and Cyber Security Service",
+    "links": {
+      "government": "Government",
+      "presidency": "Presidency",
+      "constitution": "Constitution",
+      "contacts": "Contacts",
+      "developers": "Developers"
+    }
+  },
+  "home": {
+    "hero": {
+      "description": "Platform for signing and publishing electronic petitions validated in the Republic of Moldova",
+      "headline": {
+        "part1": "Give voice to your community",
+        "part2": "and change the future!"
+      }
+    }
+  },
+
+  "petition": {
+    "status": {
+      "pending_review": "Pending review",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "pending": "Collecting signatures",
+      "in_progress": "In progress",
+      "completed": "Completed"
+    },
+    "signatures": "Signatures",
+    "initiated_by": "Initiated by",
+    "remaining_days": "Remaining days",
+    "petition": "Petition",
+    "petitions": "Petitions",
+    "search_results_for": "Search results for"
+  },
+  "sort": {
+    "newest": "Newest",
+    "most_popular": "Most popular"
+  },
+  "filter": {
+    "only_my_region": "Only from my region"
+  }
 }

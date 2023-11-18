@@ -13,3 +13,7 @@ a {
   color: inherit;
   text-decoration: none;
 }
+
+.font-serif {
+  font-family: "Libre Baskerville", serif !important;
+}

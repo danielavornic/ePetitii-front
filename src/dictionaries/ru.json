@@ -1,3 +1,59 @@
 {
-  "hi": "Hello"
+  "header": {
+    "official_website": "Официальный сайт Президенции РМ",
+    "help": "Помощь",
+    "user": {
+      "profile": "Профиль",
+      "logout": "Выход"
+    },
+    "authentication": "Аутентификация",
+    "site_logo": "ЭЛЕКТРОННЫЕ ПЕТИЦИИ",
+    "official_representation": "Официальное онлайн представительство Президенции РМ",
+    "search_placeholder": "Поиск петиции",
+    "create_petition": "Создать петицию"
+  },
+  "footer": {
+    "copyright": "Правительство Республики Молдова. Все права защищены.",
+    "administration": "Технико-технологическое управление",
+    "service": "Служба информационных технологий и кибербезопасности.",
+    "links": {
+      "government": "Правительство",
+      "presidency": "Президентство",
+      "constitution": "Конституция",
+      "contacts": "Контакты",
+      "developers": "Разработчики"
+    }
+  },
+  "home": {
+    "hero": {
+      "description": "Платформа для подписания и публикации электронных петиций, утвержденная в Республике Молдова",
+      "headline": {
+        "part1": "Дайте голос вашему сообществу",
+        "part2": "и измените будущее!"
+      }
+    }
+  },
+  "petition": {
+    "status": {
+      "pending_review": "На рассмотрении",
+      "approved": "Одобрена",
+      "rejected": "Отклонена",
+      "pending": "В сборе",
+      "in_progress": "В процессе",
+      "completed": "Завершена"
+    },
+    "signatures": "Подписи",
+    "initiated_by": "Инициирована",
+    "remaining_days": "Осталось дней",
+    "petition": "Петиция",
+    "petitions": "Петиции",
+    "search_results_for": "Результаты поиска для"
+  },
+  "sort": {
+    "newest": "Новые",
+    "most_popular": "Популярные"
+  },
+  "filter": {
+    "only_my_region": "Только мой регион"
+  }
 }

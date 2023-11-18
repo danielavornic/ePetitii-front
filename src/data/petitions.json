@@ -1,0 +1,137 @@
+[
+  {
+    "id": 123,
+    "initiator": {
+      "name": "Jane",
+      "surname": "Doe",
+      "idnp": "987654321",
+      "region": "Chicago",
+      "birthdate": "1988-03-15"
+    },
+    "name": "Sprijin pentru dezvoltarea tinerilor în domeniul tehnologic.",
+    "date": "2023-05-19T00:00:00.000Z",
+    "currSigns": 2500,
+    "neededSigns": 5000,
+    "description": "Cerem guvernului să ofere susținere financiară și resurse pentru dezvoltarea tinerilor în domeniul tehnologic.",
+    "receiver": "Ministerului Educației",
+    "status": "Deschis",
+    "signers": [
+      {
+        "name": "Robert",
+        "surname": "Brown",
+        "idnp": "123456789",
+        "region": "New York",
+        "birthdate": "1991-08-25"
+      },
+      {
+        "name": "Emily",
+        "surname": "Johnson",
+        "idnp": "654321987",
+        "region": "California",
+        "birthdate": "1995-02-12"
+      }
+    ],
+    "deadline": "2023-07-31T00:00:00.000Z",
+    "categories": [
+      {
+        "id": 1,
+        "name": "Educatie",
+        "i18n": {
+          "en": "Education",
+          "ro": "Educatie",
+          "ru": "Educatie"
+        }
+      }
+    ]
+  },
+  {
+    "id": 124,
+    "initiator": {
+      "name": "Ion",
+      "surname": "Popescu",
+      "idnp": "456789123",
+      "region": "București",
+      "birthdate": "1980-07-05"
+    },
+    "name": "Construirea unei parcuri de distracții în oraș.",
+    "date": "2023-05-19T00:00:00.000Z",
+    "currSigns": 1200,
+    "neededSigns": 3000,
+    "description": "Solicităm autorităților locale construirea unui parc de distracții pentru a spori oferta de agrement în oraș.",
+    "receiver": "Primăriei municipiului",
+    "status": "Deschis",
+    "signers": [
+      {
+        "name": "Maria",
+        "surname": "Ionescu",
+        "idnp": "789123456",
+        "region": "Cluj-Napoca",
+        "birthdate": "1993-10-18"
+      },
+      {
+        "name": "Mihai",
+        "surname": "Constantinescu",
+        "idnp": "321987654",
+        "region": "Timișoara",
+        "birthdate": "1987-12-03"
+      }
+    ],
+    "deadline": "2023-08-31T00:00:00.000Z",
+    "categories": [
+      {
+        "id": 1,
+        "name": "Educatie",
+        "i18n": {
+          "en": "Education",
+          "ro": "Educatie",
+          "ru": "Educatie"
+        }
+      }
+    ]
+  },
+  {
+    "id": 125,
+    "initiator": {
+      "name": "Andreea",
+      "surname": "Popa",
+      "idnp": "654987321",
+      "region": "Iași",
+      "birthdate": "1997-12-08"
+    },
+    "name": "Susținere pentru dezvoltarea comunităților rurale.",
+    "date": "2023-05-19T00:00:00.000Z",
+    "currSigns": 3500,
+    "neededSigns": 7000,
+    "description": "Cerem guvernului și autorităților locale să acorde mai multe resurse pentru dezvoltarea comunităților rurale.",
+    "receiver": "Guvernului României",
+    "status": "Deschis",
+    "signers": [
+      {
+        "name": "Alexandru",
+        "surname": "Popescu",
+        "idnp": "321654987",
+        "region": "Brașov",
+        "birthdate": "1990-06-15"
+      },
+      {
+        "name": "Elena",
+        "surname": "Ionescu",
+        "idnp": "789123456",
+        "region": "Sibiu",
+        "birthdate": "1983-03-22"
+      }
+    ],
+    "deadline": "2023-09-30T00:00:00.000Z",
+    "categories": [
+      {
+        "id": 1,
+        "name": "Educatie",
+        "i18n": {
+          "en": "Education",
+          "ro": "Educatie",
+          "ru": "Educatie"
+        }
+      }
+    ]
+  }
+]

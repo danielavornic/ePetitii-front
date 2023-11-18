@@ -1,18 +1,14 @@
-import Head from "next/head";
 import { Heading } from "@chakra-ui/react";
 import { useTranslations } from "next-intl";
+import { HomeHero, Layout, PetitionsSection } from "@/components";
 
 export default function Home() {
   const t = useTranslations();
 
   return (
-    <>
-      <Head>
-        <title>Create Next App</title>
-      </Head>
-      <main>
-        <Heading>{t("hi")}</Heading>
-      </main>
-    </>
+    <Layout isFull>
+      <HomeHero />
+      <PetitionsSection />
+    </Layout>
   );
 }
