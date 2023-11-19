@@ -64,18 +64,14 @@ const Petition = () => {
   });
 
   const data = isTranslated ? translatedPetition : petition;
-  const { name, description, region, receiver } = data || {
+  const { description, name, voters, region } = data || {
     name: "",
     description: "",
-    categories: [],
-    region: 0,
-    receiver: 0,
-    isChecked: false,
-    isConsented: false,
+    voters: [],
+    region: null,
   };
 
   const hasInitiatedPetition = petition?.initiator.idnp === user?.idnp;
-  const voters = petition?.signers || [];
 
   const generatePDF = async () => {
     const documentDefinition = {
@@ -119,7 +115,7 @@ const Petition = () => {
         },
         { text: "Lista semnatarilor:", fontSize: 12, marginTop: 6, bold: true },
         {
-          ol: voters.map((voter: Signer) => ({ text: `${voter.name} ${voter.surname}` })),
+          ol: voters.map((voter: Signer) => ({ text: voter.name })),
           fontSize: 10,
           marginTop: 5,
         },
