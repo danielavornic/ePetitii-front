@@ -29,6 +29,7 @@ import { msignImage } from "@/constants";
 import { useState } from "react";
 import Share from "@/components/petition/Share";
 import { useTranslations } from "next-intl";
+import { TDocumentDefinitions } from "pdfmake/interfaces";
 
 const { convert } = require("html-to-text");
 
@@ -137,7 +138,7 @@ const Petition = () => {
           },
         ],
       },
-    };
+    } as TDocumentDefinitions;
 
     const pdfDocument = pdfMake.createPdf(documentDefinition);
 
