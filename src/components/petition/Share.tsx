@@ -1,4 +1,5 @@
 import { HStack, Heading, IconButton, VStack } from "@chakra-ui/react";
+import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
 import { FaLink } from "react-icons/fa";
 import {
@@ -11,13 +12,14 @@ import {
 } from "react-share";
 
 const Share = () => {
+  const t = useTranslations("petition");
   const { asPath } = useRouter();
   const url = `${process.env.NEXT_PUBLIC_HOST_URL}`;
 
   return (
     <VStack w="full" align={"flex-start"} justifyContent="start" spacing={4} pt={12}>
       <Heading as="h3" size="sm" fontWeight={400}>
-        Distribuie petiția
+        {t("share_petition")}
       </Heading>
       <HStack spacing={4}>
         <FacebookShareButton url={url}>

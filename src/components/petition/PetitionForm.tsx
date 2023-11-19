@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Checkbox,
   FormControl,
@@ -15,8 +16,8 @@ import Select from "react-select";
 import { Category, PetitionFormData } from "@/types";
 import { Editor } from "@tinymce/tinymce-react";
 import wash from "washyourmouthoutwithsoap";
-import { useQuery } from "@tanstack/react-query";
-import { regions, categories as categoriesApi, receivers as receiversApi } from "@/api";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { regions, categories as categoriesApi, receivers as receiversApi, petitions } from "@/api";
 import { useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors";
 import { useEffect } from "react";
@@ -51,7 +52,7 @@ export const PetitionForm = ({
   const isPrimar = receiver === 3;
   const { user } = useSelector(selectUser);
 
-  const extractText = (htmlString: stirng) => {
+  const extractText = (htmlString: string) => {
     // Use a regular expression to remove all HTML tags
     return htmlString.replace(/<[^>]*>/g, "");
   };
@@ -119,20 +120,17 @@ export const PetitionForm = ({
       setErrors({ ...errors, description: "" });
     }
   };
-  console.log(wash.words("ro"));
 
   const handleEditorChange = (content: string) => {
     setFormData({ ...formData, description: content });
-    console.log(extractText(content).length);
 
-    // // Validation logic for description content
     if (extractText(content).length < 50) {
       setErrors({ ...errors, description: "Conținutul trebuie să aibă minim 50 caractere" });
     } else {
       setErrors({ ...errors, description: "" });
     }
 
-    const isProfane = wash.check("ro", content);
+    const isProfane = wash.check("ro", extractText(content));
     if (isProfane) {
       setErrors({ ...errors, description: "Conținutul petiției conține cuvinte obscene" });
     }
@@ -168,22 +166,18 @@ export const PetitionForm = ({
             Conținut
           </FormLabel>
           <FormHelperText fontSize="sm" color="gray.500" mb={4}>
-            Continutul insuficient
+            Conținutul petiției trebuie să fie detaliat și să conțină minim 100 de caractere.
           </FormHelperText>
           <Editor
             value={description}
             init={{
-              height: 300,
+              height: 500,
+              apiKey: "bq2e25erbfjw06gx49ky7pwwexnwzzxj858jzcakrxfy2zx2",
               menubar: true,
-              plugins: [
-                "advlist autolink lists link image charmap print preview anchor",
-                "searchreplace visualblocks code fullscreen",
-                "insertdatetime media table paste code help wordcount",
-              ],
-              toolbar:
-                "formatselect | bold italic backcolor | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat",
-              block_formats:
-                "Paragraph=p; Header 1=h1; Header 2=h2; Header 3=h3; Header 4=h4; Header 5=h5; Header 6=h6",
+              plugins:
+                "a11ychecker advcode advlist advtable anchor autocorrect autolink autosave casechange charmap checklist code codesample directionality editimage emoticons export footnotes formatpainter fullscreen help image importcss inlinecss insertdatetime link linkchecker lists media mediaembed mentions mergetags nonbreaking pagebreak pageembed permanentpen powerpaste preview quickbars save searchreplace table tableofcontents template tinycomments tinydrive tinymcespellchecker typography visualblocks visualchars wordcount",
+              toolbar1:
+                "undo redo | forecolor h1 h2 h3 h4 h5 h6 hr indent | bold italic | alignleft aligncenter alignright alignjustify | indent outdent | wordcount",
             }}
             onEditorChange={handleEditorChange}
           />
@@ -212,7 +206,7 @@ export const PetitionForm = ({
                 setFormData({
                   ...formData,
                   receiver: option ? option.value : 0,
-                  region: undefined,
+                  // region: undefined,
                 })
               }
               styles={{

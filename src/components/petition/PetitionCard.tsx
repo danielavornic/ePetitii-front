@@ -12,23 +12,16 @@ export const PetitionCard = ({ petition }: PetitionCardProps) => {
   const t = useTranslations("petition");
 
   const { locale } = useRouter();
-  const { id, initiator, name, date, currSigns, neededSigns, deadline, categories, status } =
+  const { id, initiator, name, date, currSigns, neededSigns, deadLine, categories, status } =
     petition;
 
-  const deadlineTime = new Date(deadline);
+  const deadLineTime = new Date(deadLine);
 
-  const daysLeft = Math.floor((deadlineTime.getTime() - new Date().getTime()) / (1000 * 3600 * 24));
+  const daysLeft = Math.floor((deadLineTime.getTime() - new Date().getTime()) / (1000 * 3600 * 24));
   const progress = Math.floor((currSigns / neededSigns) * 100);
 
   const dateSplit = date ? date?.split("T")[0] : "";
-  const progressColor =
-    status === PetitionStatus.approved || status === PetitionStatus.pending
-      ? "green"
-      : status === PetitionStatus.rejected
-        ? "red"
-        : status === PetitionStatus.pending_review
-          ? "blue"
-          : "yellow";
+  const progressColor = status === PetitionStatus.pending ? "green" : "blue";
 
   return (
     <Link href={`/petitions/${id}`}>

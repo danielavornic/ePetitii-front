@@ -44,7 +44,7 @@ const CreatePetitionForm = ({
   const [errors, setErrors] = useState(initalState);
 
   return (
-    <Layout isFull>
+    <Layout isFull title="Creați o petiție">
       <Flex w={"full"} h="200px" bg="primary.600" color="white">
         <VStack w={"full"} justify={"center"} px={8}>
           <Stack w="full" maxW={"8xl"} align={"flex-start"} justifyContent="start" spacing={6}>
@@ -76,7 +76,7 @@ const CreatePetitionForm = ({
 };
 
 const CreatePetitionSubmitted = ({ formData }: { formData: PetitionFormData }) => {
-  const { name, description, categories, receiver, region } = formData;
+  const { name, description, categories, receiver } = formData;
 
   const { user } = useSelector(selectUser);
   const { push } = useRouter();
@@ -88,7 +88,7 @@ const CreatePetitionSubmitted = ({ formData }: { formData: PetitionFormData }) =
         description,
         categories,
         receiver,
-        region,
+        region: Number(user?.region),
         initiator_idnp: String(user?.idnp),
       }),
     onSuccess: (id) => {
@@ -96,7 +96,9 @@ const CreatePetitionSubmitted = ({ formData }: { formData: PetitionFormData }) =
     },
   });
 
-  const handleSignClick = () => mutate();
+  const handleSignClick = () => {
+    mutate();
+  };
 
   return (
     <Container maxW="8xl" py={20} h="100vh" display="flex" alignItems="center" flexDir="column">

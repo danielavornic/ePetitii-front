@@ -22,7 +22,7 @@ export const PetitionsSection = ({ hasTrending = true }: { hasTrending?: boolean
   const { user } = useSelector(selectUser);
 
   const { query, push, locale } = useRouter();
-  const { category, sort, search, status, region } = query;
+  const { category_ids, sortBy, search, status, region } = query;
 
   const { data: categories, isSuccess: isCategoriesSuccess } = useQuery({
     queryKey: ["categories"],
@@ -33,12 +33,21 @@ export const PetitionsSection = ({ hasTrending = true }: { hasTrending?: boolean
     queryKey: [
       "petitions",
       {
-        category,
-        sort,
+        category_ids,
+        sortBy,
         status,
+        region,
+        search,
       },
     ],
-    queryFn: () => petitions.getList({ categories, sort: String(sort), status: String(status) }),
+    queryFn: () =>
+      petitions.getList({
+        ...(category_ids && { category_ids: String(category_ids) }),
+        ...(sortBy && { sortBy: String(sortBy) }),
+        ...(status && { status: String(status) }),
+        ...(user && user?.region && region ? { region: Number(user?.region) } : {}),
+        ...(search && { search: String(search) }),
+      }),
   });
 
   const updateParams = (key: string, value: string | number | boolean | undefined) => {
@@ -55,8 +64,8 @@ export const PetitionsSection = ({ hasTrending = true }: { hasTrending?: boolean
     );
   };
 
-  const setCategory = (category: string) => updateParams("categories", category);
-  const setSortBy = (sortBy: string) => updateParams("sort", sortBy);
+  const setCategory = (category: string) => updateParams("category_ids", category);
+  const setSortBy = (sortBy: string) => updateParams("sortBy", sortBy);
   const setStatus = (status: string) => updateParams("status", status);
 
   const setAvailableByLocation = (availableByLocation: boolean) => {
@@ -111,19 +120,20 @@ export const PetitionsSection = ({ hasTrending = true }: { hasTrending?: boolean
                 label: category.i18n[locale as "ro" | "ru" | "en"],
                 value: category.id,
               }))}
+              placeholder={t("filter.categories")}
             />
 
             <HStack h="40px" spacing={4}>
               <Button
-                variant={sort === "newest" ? "outline" : "ghost"}
+                variant={sortBy === "new" ? "outline" : "ghost"}
                 colorScheme="blue"
-                onClick={() => setSortBy("newest")}
+                onClick={() => setSortBy("new")}
                 rounded="full"
               >
                 {t("sort.newest")}
               </Button>
               <Button
-                variant={sort === "popular" ? "outline" : "ghost"}
+                variant={sortBy === "popular" ? "outline" : "ghost"}
                 colorScheme="blue"
                 onClick={() => setSortBy("popular")}
                 rounded="full"

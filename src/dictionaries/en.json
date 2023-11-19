@@ -33,7 +33,6 @@
       }
     }
   },
-
   "petition": {
     "status": {
       "pending_review": "Pending review",
@@ -48,20 +47,40 @@
     "remaining_days": "Remaining days",
     "petition": "Petition",
     "petitions": "Petitions",
-    "search_results_for": "Search results for"
+    "search_results_for": "Search results for",
+    "initiator": "Initiator",
+    "home": "Home",
+    "tr": {
+      "translate": "Translate",
+      "view_original": "View original"
+    },
+    "creation_date": "Creation date",
+    "deadline": "Deadline",
+    "receiver": "Receiver",
+    "region": "Region",
+    "categories": "Categories",
+    "save_as_pdf": "Save as PDF",
+    "share_petition": "Share petition",
+    "login_to_sign": "Login to sign",
+    "you_signed_petition": "Already signed",
+    "sign_petition": "Sign petition",
+    "needed": "Needed",
+    "of": "of",
+    "edit": "Edit"
   },
   "sort": {
     "newest": "Newest",
     "most_popular": "Most popular"
   },
   "filter": {
-    "only_my_region": "Only from my region"
+    "only_my_region": "Only from my region",
+    "categories": "Categories"
   },
   "modal": {
     "header": "Choose Your Categories & Subscribe Now",
     "description": "Subscribe to our newsletter and get the latest updates on petitions that matter to you. Select your preferred categories and never miss a chance to make a difference.",
-    "subscribe" : "Subscribe",
-    "cancel" : "Cancel"
+    "subscribe": "Subscribe",
+    "cancel": "Cancel"
   },
   "errors": {
     "invalidEmail": "Email is invalid",

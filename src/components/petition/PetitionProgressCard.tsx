@@ -19,22 +19,15 @@ interface PetitionProgressCardProps {
 }
 
 export const PetitionProgressCard = ({ petition }: PetitionProgressCardProps) => {
-  const { user } = useSelector(selectUser);
-  const { id, status, currSigns, neededSigns, deadline, initiator, signers, region } = petition;
   const t = useTranslations("petition");
+  const { user } = useSelector(selectUser);
+  const { id, status, currSigns, neededSigns, deadLine, initiator, signers, region } = petition;
 
-  const progressColor =
-    status === PetitionStatus.approved || status === PetitionStatus.pending
-      ? "green.500"
-      : status === PetitionStatus.rejected
-        ? "red.500"
-        : status === PetitionStatus.pending_review
-          ? "blue.500"
-          : "yellow.500";
+  const progressColor = status === PetitionStatus.pending ? "green.500" : "blue.500";
 
   const percentage = (currSigns * 100) / neededSigns;
-  const deadlineTime = new Date(deadline);
-  const daysLeft = Math.floor((deadlineTime.getTime() - new Date().getTime()) / (1000 * 3600 * 24));
+  const deadLineTime = new Date(deadLine);
+  const daysLeft = Math.floor((deadLineTime.getTime() - new Date().getTime()) / (1000 * 3600 * 24));
 
   let signButton;
 
@@ -49,9 +42,7 @@ export const PetitionProgressCard = ({ petition }: PetitionProgressCardProps) =>
   if (user === null) {
     signButton = (
       <Button {...commonButtonProps} colorScheme="red" variant="link" fontWeight={500}>
-        <Link href={`/mpass?petitionId=${id}`}>
-          Autorizați-vă pentru <br /> a semna petiția
-        </Link>
+        <Link href={`/mpass?petitionId=${id}`}>{t("login_to_sign")}</Link>
       </Button>
     );
   } else if (initiator.idnp !== user?.idnp) {
@@ -75,9 +66,9 @@ export const PetitionProgressCard = ({ petition }: PetitionProgressCardProps) =>
           {...(!isAllowedFromRegion && nowAllowedButtonProps)}
         >
           {signedByUser
-            ? "Ați semnat petiția"
+            ? t("you_signed_petition")
             : isAllowedFromRegion
-              ? "Semnați petiția"
+              ? t("sign_petition")
               : "Petiție indisponibilă \nîn regiunea dvs."}
         </Button>
       </Link>
@@ -85,7 +76,7 @@ export const PetitionProgressCard = ({ petition }: PetitionProgressCardProps) =>
   } else {
     signButton = (
       <Button {...commonButtonProps}>
-        <Link href={`/manage?petitionId=${id}`}>Administrați petiţia</Link>
+        <Link href={`/petitions/${id}/edit`}>{t("edit")}</Link>
       </Button>
     );
   }
@@ -104,15 +95,15 @@ export const PetitionProgressCard = ({ petition }: PetitionProgressCardProps) =>
     >
       <CardBody flexDir="column" display="flex" alignItems="center">
         <VStack spacing="5">
-          <Heading size="md">Semnături</Heading>
+          <Heading size="md">{t("signatures")}</Heading>
           <CircularProgress value={percentage} size="200px" color={progressColor} thickness="5px">
             <CircularProgressLabel>
               <VStack>
                 <Heading size="lg">{petition.currSigns}</Heading>
-                <Text fontSize="sm" fontFamily="serif">
-                  din {petition.neededSigns}
+                <Text fontSize="sm" fontFamily="serif" textTransform="lowercase">
+                  {t("of")} {petition.neededSigns}
                   <br />
-                  necesare
+                  {t("needed")}
                 </Text>
               </VStack>
             </CircularProgressLabel>
@@ -122,7 +113,7 @@ export const PetitionProgressCard = ({ petition }: PetitionProgressCardProps) =>
               {t(`status.${petition.status}`)}
             </Text>
             <Text fontSize="sm" fontFamily="serif" mt={2}>
-              {daysLeft < 1 ? "60" : daysLeft} zile rămase
+              {daysLeft < 1 ? "60" : daysLeft} {t("remaining_days")}
             </Text>
           </VStack>
           <>{signButton}</>

@@ -18,8 +18,7 @@ import {
 import { useQuery } from "@tanstack/react-query";
 import { petitions } from "@/api";
 import { Layout, Loader, PetitionProgressCard } from "@/components";
-import { FaFacebook, FaTwitter, FaEnvelope, FaLink } from "react-icons/fa";
-
+import { FaFilePdf } from "react-icons/fa6";
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { useSelector } from "react-redux";
@@ -29,10 +28,15 @@ import { Signer } from "@/types";
 import { msignImage } from "@/constants";
 import { useState } from "react";
 import Share from "@/components/petition/Share";
+import { useTranslations } from "next-intl";
+
+const { convert } = require("html-to-text");
 
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const Petition = () => {
+  const t = useTranslations("petition");
+
   const { user } = useSelector(selectUser);
   const { query, locale } = useRouter();
   const id = query.id;
@@ -45,13 +49,16 @@ const Petition = () => {
     isSuccess,
   } = useQuery({
     queryKey: ["petition", id],
-    queryFn: () => petitions.getById(Number(id)),
+    queryFn: () =>
+      petitions.getById(Number(id), { locale: locale === "en" ? "en-GB" : (locale as string) }),
   });
 
   const [isTranslated, setIsTranslated] = useState(false);
-  const { data: translatedPetition } = useQuery({
+
+  const { data: translatedPetition, isLoading: isLoadingT } = useQuery({
     queryKey: ["petition-t", id, locale],
-    queryFn: () => petitions.translate(Number(id), { locale: locale as "ro" | "ru" | "en" }),
+    queryFn: () =>
+      petitions.translate(Number(id), { locale: locale === "en" ? "en-GB" : (locale as string) }),
     enabled: isTranslated,
   });
 
@@ -77,7 +84,7 @@ const Petition = () => {
             { width: "*", text: "" },
             {
               width: "auto",
-              text: `${petition?.date?.split("T")[0]}, ${petition?.region.i18n[
+              text: `${petition?.date?.split("T")[0]}, ${petition?.initiator.region.i18n[
                 locale as "ro" | "ru" | "en"
               ]}`,
               fontSize: 10,
@@ -94,7 +101,11 @@ const Petition = () => {
           marginTop: 20,
           alignment: "center",
         },
-        { text: petition?.description, fontSize: 12, marginTop: 24 },
+        {
+          text: convert(petition?.description),
+          fontSize: 12,
+          marginTop: 24,
+        },
         {
           text: [{ text: "Inițiat de: ", bold: true }, fullName],
           fontSize: 12,
@@ -135,7 +146,7 @@ const Petition = () => {
 
   return (
     <Layout isFull>
-      {isLoading ? (
+      {isLoading || isLoadingT ? (
         <Flex w={"full"} h="100vh" justifyContent="center" mt={20} color="white">
           <Loader />
         </Flex>
@@ -146,14 +157,16 @@ const Petition = () => {
               <Stack w="full" maxW={"8xl"} align={"flex-start"} justifyContent="start" spacing={6}>
                 <Breadcrumb spacing="8px" separator={<ChevronRightIcon />}>
                   <BreadcrumbItem>
-                    <BreadcrumbLink href="/">Acasa</BreadcrumbLink>
+                    <BreadcrumbLink href="/">{t("home")}</BreadcrumbLink>
                   </BreadcrumbItem>
                   <BreadcrumbItem isCurrentPage>
-                    <BreadcrumbLink href="#">Petiția #{id}</BreadcrumbLink>
+                    <BreadcrumbLink href="#">
+                      {t("petition")} #{id}
+                    </BreadcrumbLink>
                   </BreadcrumbItem>
                 </Breadcrumb>
                 <Heading as="h1" size="2xl" my={4}>
-                  Petiția #{id}
+                  {t("petition")} #{id}
                 </Heading>
               </Stack>
             </VStack>
@@ -163,11 +176,11 @@ const Petition = () => {
               <VStack w="full" align={"flex-start"} justifyContent="start">
                 {isTranslated ? (
                   <Button size="sm" colorScheme="gray" onClick={() => setIsTranslated(false)}>
-                    Vezi originalul
+                    {t("tr.view_original")}
                   </Button>
                 ) : (
                   <Button size="sm" colorScheme="gray" onClick={() => setIsTranslated(true)}>
-                    Tradu
+                    {t("tr.translate")}
                   </Button>
                 )}
 
@@ -178,36 +191,36 @@ const Petition = () => {
                 <VStack spacing={4} pt={4} align="start" w="full">
                   <Heading as="h3" size="sm" fontWeight={400}>
                     <Text as="span" fontWeight="bold" fontFamily="serif">
-                      Inițiator:
+                      {t("initiator")}:
                     </Text>{" "}
                     {fullName}
                   </Heading>
 
                   <Heading as="h3" size="sm" fontWeight={400}>
                     <Text as="span" fontWeight="bold" fontFamily="serif">
-                      Data depunerii:
+                      {t("creation_date")}:
                     </Text>{" "}
                     {petition.date?.split("T")[0]}
                   </Heading>
 
-                  {petition.deadline && (
+                  {petition.deadLine && (
                     <Heading as="h3" size="sm" fontWeight={400}>
                       <Text as="span" fontWeight="bold" fontFamily="serif">
-                        Data limită:
+                        {t("deadline")}:
                       </Text>{" "}
-                      {petition.deadline.split("T")[0]}
+                      {petition.deadLine.split("T")[0]}
                     </Heading>
                   )}
                   <Heading as="h3" size="sm" fontWeight={400}>
                     <Text as="span" fontWeight="bold" fontFamily="serif">
-                      Destinatar:
+                      {t("receiver")}:
                     </Text>{" "}
                     {petition.receiver.i18n[locale as "ro" | "ru" | "en"]}{" "}
                   </Heading>
                   {region && (
                     <Heading as="h3" size="sm" fontWeight={400}>
                       <Text as="span" fontWeight="bold" fontFamily="serif">
-                        Regiune:
+                        {t("region")}:
                       </Text>{" "}
                       {region.i18n[locale as "ro" | "ru" | "en"]}
                     </Heading>
@@ -215,7 +228,7 @@ const Petition = () => {
                   <HStack>
                     <Heading as="h3" size="sm" fontWeight={400}>
                       <Text as="span" fontWeight="bold" fontFamily="serif">
-                        Categorii:
+                        {t("categories")}:
                       </Text>{" "}
                     </Heading>
                     <HStack spacing={2}>
@@ -228,15 +241,27 @@ const Petition = () => {
                   </HStack>
                 </VStack>
 
-                <Text fontSize="lg" pt={8} pb={2} whiteSpace="pre-line">
-                  {description}
-                </Text>
+                <Text
+                  fontSize="lg"
+                  pt={8}
+                  pb={2}
+                  whiteSpace="pre-line"
+                  dangerouslySetInnerHTML={{
+                    __html: description,
+                  }}
+                />
               </VStack>
               <Box w="280px" position="sticky" top={4}>
                 <PetitionProgressCard petition={petition} />
                 {hasInitiatedPetition && (
-                  <Button w="full" colorScheme="gray" mt={8} onClick={generatePDF}>
-                    Salvează ca PDF
+                  <Button
+                    w="full"
+                    colorScheme="gray"
+                    mt={8}
+                    onClick={generatePDF}
+                    leftIcon={<FaFilePdf />}
+                  >
+                    {t("save_as_pdf")}
                   </Button>
                 )}
                 <Share />

@@ -16,7 +16,7 @@ const Msign = () => {
   const { mutate } = useMutation({
     mutationFn: () =>
       petitions.sign(Number(petitionId), {
-        initatior_idnp: String(user?.idnp),
+        user_idnp: String(user?.idnp),
       }),
     onSuccess: () => {
       push(`/petitions/${petitionId}`);

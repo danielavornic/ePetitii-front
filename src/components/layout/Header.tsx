@@ -21,7 +21,7 @@ import {
 import { SearchIcon } from "@chakra-ui/icons";
 import { FaPlus } from "react-icons/fa";
 import { selectUser } from "@/store/selectors";
-import { login, logout } from "@/store/user";
+import { login, logout, subscribe } from "@/store/user";
 import { LanguageSwitcher } from "@/components";
 
 export const Header = () => {
@@ -46,8 +46,12 @@ export const Header = () => {
     setSearchTerm(search || "");
 
     const userLocal = localStorage.getItem("user");
+    const isSubscribed = localStorage.getItem("isSubscribed");
     if (userLocal) {
       dispatch(login(JSON.parse(userLocal)));
+    }
+    if (isSubscribed) {
+      dispatch(subscribe());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

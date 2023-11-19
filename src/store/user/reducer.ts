@@ -25,6 +25,7 @@ export const userReducer = (state = initialState, action: any): UserState => {
         user: null,
       };
     case SUBSCRIBE:
+      console.log("SUBSCRIBE");
       return {
         ...state,
         user: {

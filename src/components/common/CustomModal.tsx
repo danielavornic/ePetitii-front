@@ -16,11 +16,11 @@ import {
   Flex,
 } from "@chakra-ui/react";
 import Image from "next/image";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { ActionMeta, MultiValue, OptionBase, Select } from "chakra-react-select";
 import { useRouter } from "next/router";
 import { Category } from "@/types";
-import { categories as categoriesApi } from "@/api";
+import { categories as categoriesApi, emails } from "@/api";
 import { useTranslations } from "next-intl";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "@/store/selectors";
@@ -83,6 +83,7 @@ export const CustomModal: React.FC = () => {
     }
 
     if (isValid) {
+      mutate();
       console.log("Valid email:", email);
       // Handle valid submission here
     }
@@ -92,11 +93,24 @@ export const CustomModal: React.FC = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log("User:", user);
     if (user && !user.isSubscribed) {
       onOpen();
       dispatch(subscribe());
+      localStorage.setItem("isSubscribed", "true");
     }
   }, [user]);
+
+  const { mutate } = useMutation({
+    mutationFn: () =>
+      emails.subscribe({
+        email,
+        categories: selectedOptions.map((option) => Number(option.value)),
+      }),
+    onSuccess: () => {
+      onClose();
+    },
+  });
 
   return (
     <>

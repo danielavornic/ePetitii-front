@@ -47,13 +47,33 @@
     "remaining_days": "Осталось дней",
     "petition": "Петиция",
     "petitions": "Петиции",
-    "search_results_for": "Результаты поиска для"
+    "search_results_for": "Результаты поиска для",
+    "initiator": "Инициатор",
+    "home": "Главная",
+    "tr": {
+      "translate": "Перевести",
+      "view_original": "Посмотреть оригинал"
+    },
+    "creation_date": "Дата создания",
+    "deadline": "Срок",
+    "receiver": "Получатель",
+    "region": "Регион",
+    "categories": "Категории",
+    "save_as_pdf": "Сохранить как PDF",
+    "share_petition": "Поделиться петицией",
+    "login_to_sign": "Войдите, чтобы подписать",
+    "you_signed_petition": "Уже подписали",
+    "sign_petition": "Подписать петицию",
+    "needed": "Необходимо",
+    "of": "из",
+    "edit": "Редактировать"
   },
   "sort": {
     "newest": "Новые",
     "most_popular": "Популярные"
   },
   "filter": {
-    "only_my_region": "Только мой регион"
+    "only_my_region": "Только мой регион",
+    "categories": "Категории"
   }
 }

@@ -47,14 +47,34 @@
     "remaining_days": "Zile rămase",
     "petition": "Petiție",
     "petitions": "Petiții",
-    "search_results_for": "Rezultatele căutării pentru"
+    "search_results_for": "Rezultatele căutării pentru",
+    "initiator": "Inițiator",
+    "home": "Acasă",
+    "tr": {
+      "translate": "Tradu",
+      "view_original": "Vezi originalul"
+    },
+    "creation_date": "Data creării",
+    "deadline": "Termen limită",
+    "receiver": "Destinatar",
+    "region": "Regiune",
+    "categories": "Categorii",
+    "save_as_pdf": "Salvează ca PDF",
+    "share_petition": "Partajează petiția",
+    "login_to_sign": "Conectați-vă pentru a semna",
+    "you_signed_petition": "Ați semnat deja",
+    "sign_petition": "Semnează petiția",
+    "needed": "Necesare",
+    "of": "din",
+    "edit": "Editează"
   },
   "sort": {
     "newest": "Cele mai noi",
     "most_popular": "Cele mai populare"
   },
   "filter": {
-    "only_my_region": "Doar din regiunea mea"
+    "only_my_region": "Doar din regiunea mea",
+    "categories": "Categorii"
   },
   "modal": {
     "header": "Alegeți Categoriile Dumneavoastră și Abonați-vă Acum",

@@ -2,9 +2,9 @@ import { I18n } from ".";
 
 export enum PetitionStatus {
   pending = "pending", // waiting for votes
-  pending_review = "pending_review", // not public
-  approved = "approved", // by admin
-  rejected = "rejected", // by admi
+  // pending_review = "pending_review", // not public
+  // approved = "approved", // by admin
+  // rejected = "rejected", // by admi
   in_progress = "in_progress", // in case it is a project
   completed = "completed",
 }
@@ -13,7 +13,7 @@ interface Initiator {
   name: string;
   surname: string;
   idnp: string;
-  region: number;
+  region: I18n;
   birthdate: string;
 }
 
@@ -21,7 +21,7 @@ export interface Signer {
   name: string;
   surname: string;
   idnp: string;
-  region: number;
+  region: I18n;
   birthdate: string;
 }
 
@@ -43,7 +43,7 @@ export interface Petition {
   receiver: Category;
   status: PetitionStatus;
   signers: Signer[];
-  deadline: string;
+  deadLine: string;
   categories: Category[];
   locale?: string; //for translation
 }

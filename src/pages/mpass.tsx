@@ -6,11 +6,11 @@ import { User } from "@/types";
 import { login } from "@/store/user";
 
 const user1: User = {
-  idnp: "1234567891234",
+  idnp: "2003500038814",
   name: "Daniela",
   surname: "Vornic",
   region: 1,
-  birthdate: "2004-01-23",
+  birthdate: "03-02-2004",
   email: "daniela.vornic@gmail.com",
 };
 
