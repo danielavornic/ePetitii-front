@@ -20,6 +20,7 @@ export const userReducer = (state = initialState, action: any): UserState => {
       };
     case LOGOUT:
       localStorage.removeItem("user");
+      localStorage.removeItem("isSubcribed");
       return {
         ...state,
         user: null,
