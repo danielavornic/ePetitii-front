@@ -15,7 +15,7 @@ import {
   IconButton,
   Button,
 } from "@chakra-ui/react";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { petitions } from "@/api";
 import { Layout, Loader, PetitionProgressCard } from "@/components";
 import { FaFilePdf } from "react-icons/fa6";
@@ -143,6 +143,13 @@ const Petition = () => {
 
     pdfDocument.download(`Petition-#${id}.pdf`);
   };
+
+  const { mutate: deletePetition } = useMutation({
+    mutationFn: () => petitions.delete(Number(id)),
+    onSuccess: () => {
+      window.location.reload();
+    },
+  });
 
   return (
     <Layout isFull>

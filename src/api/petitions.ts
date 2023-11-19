@@ -34,7 +34,7 @@ export const petitions = {
   },
 
   delete: async (id: number) => {
-    const { data } = await axios.get(`petition/delete/${id}`);
+    const { data } = await axios.delete(`petition/delete/${id}`);
     return data;
   },
 };
