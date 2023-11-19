@@ -13,7 +13,7 @@ interface Initiator {
   name: string;
   surname: string;
   idnp: string;
-  region: I18n;
+  region: Category;
   birthdate: string;
 }
 
