@@ -51,17 +51,13 @@ export const PetitionsSection = ({ hasTrending = true }: { hasTrending?: boolean
   });
 
   const updateParams = (key: string, value: string | number | boolean | undefined) => {
-    push(
-      {
-        pathname: !hasTrending ? "/petitions" : "/",
-        query: {
-          ...query,
-          [key]: value,
-        },
+    push({
+      pathname: !hasTrending ? "/petitions" : "/",
+      query: {
+        ...query,
+        [key]: value,
       },
-      undefined,
-      { shallow: true },
-    );
+    });
   };
 
   const setCategory = (category: string) => updateParams("category_ids", category);
