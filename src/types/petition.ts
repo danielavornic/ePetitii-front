@@ -7,7 +7,7 @@ export enum PetitionStatus {
   // rejected = "rejected", // by admi
   in_progress = "in_progress", // in case it is a project
   completed = "completed",
-  declined = "declined", // by initiator
+  // declined = "declined", // by initiator
 }
 
 interface Initiator {

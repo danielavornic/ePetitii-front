@@ -96,8 +96,6 @@ export const CustomModal: React.FC = () => {
     console.log("User:", user);
     if (user && !user.isSubscribed) {
       onOpen();
-      dispatch(subscribe());
-      localStorage.setItem("isSubscribed", "true");
     }
   }, [user]);
 
@@ -109,6 +107,8 @@ export const CustomModal: React.FC = () => {
       }),
     onSuccess: () => {
       onClose();
+      dispatch(subscribe());
+      localStorage.setItem("isSubscribed", "true");
     },
   });
 

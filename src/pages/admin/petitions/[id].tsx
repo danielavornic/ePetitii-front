@@ -41,17 +41,14 @@ const AdminPetition = () => {
     petition != undefined && (
       <RootLayout navHeader="Petition details">
         <div className=" w-full h-[100vh]">
-          <Flex
-            alignItems={"center"}
-            justifyContent={"center"}
-            className=" w-full pt-[70px] h-[500px]"
-          >
+          <Flex alignItems={"center"} justifyContent={"center"} className=" w-full">
             <Box
               p={4}
               shadow="md"
+              h="full"
               borderWidth="1px"
-              className="max-w-lg mx-auto bg-white"
-              style={{ maxHeight: "400px", overflowY: "auto" }}
+              className="max-w-90% w-full mx-auto bg-white"
+              style={{ maxHeight: "900px", overflowY: "auto" }}
             >
               <Heading fontSize="xl">{petition.name}</Heading>
               <Text mt={2}>
@@ -69,7 +66,12 @@ const AdminPetition = () => {
               <Text mt={2}>
                 {petition.currSigns} / {petition.neededSigns} signatures
               </Text>
-              <Text mt={2}>{petition.description}</Text>
+              <Text
+                mt={2}
+                dangerouslySetInnerHTML={{
+                  __html: petition.description,
+                }}
+              />
               <Text mt={2}>Receiver: {petition.receiver.name}</Text>
               <Badge
                 colorScheme={
